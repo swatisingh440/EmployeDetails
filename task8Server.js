@@ -49,8 +49,8 @@ app.post("/user",function(req,res,next){
     client.query(query,values,function(err,result){
         if(err){res.send(400).send(err);}
         res.send(`${result.rowCount}insertion succesful`);
-    })
-})
+    });
+});
 app.put("/user/:id",function(req,res,next){
     console.log("Inside put of user");
     let userId=req.params.id;
