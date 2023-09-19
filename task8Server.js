@@ -60,8 +60,8 @@ app.put("/user/:id",function(req,res,next){
     client.query(query,values,function(err,result){
         if(err){res.send(400).send(err);}
         res.send(`${result.rowCount} updation succesful`);
-    })
-})
+    });
+});
 
 var port=process.env.PORT||2410;
 app.listen(port,()=>console.log(`Node app listening on port ${port}!`));
