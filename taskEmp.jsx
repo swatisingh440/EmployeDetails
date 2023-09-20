@@ -2,7 +2,7 @@ import React,{Component} from "react";
 import http from "./tashServer";
 import queryString from 'query-string';
 import { Link } from "react-router-dom";
-import TaskLeft from "../nodejs/taskLeft";
+import TaskLeft from "./taskLeft";
 class TaskEmp extends Component{
     state={
         emp:[],
