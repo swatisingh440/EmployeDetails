@@ -2,7 +2,7 @@ import React,{Component} from "react";
 import http from "./tashServer";
 import queryString from 'query-string';
 import { Link } from "react-router-dom";
-import TaskLeft from "./taskLeft";
+import TaskLeft from "../nodejs/taskLeft";
 class TaskEmp extends Component{
     state={
         emp:[],
@@ -12,20 +12,20 @@ class TaskEmp extends Component{
         let searchStr=this.makeStr(queryParams)
         let {dept,desig}=this.props.match.params;
         let display=this.props.display;
-        console.log(display)
+        
         if(display==='emp'){
-        let response=await http.get(`/srv/emp?${searchStr}`)
+        let response=await http.get(`/emp?${searchStr}`)
         let {data}=response;
         this.setState({emp:data})
         console.log(data)}
         else if(display==='dept'){
-            let response=await http.get(`/srv/emp/${dept}?${searchStr}`)
+            let response=await http.get(`/emp/${dept}?${searchStr}`)
         let {data}=response;
         this.setState({emp:data})
         console.log(data)
         }
         else if(display==='desig'){
-            let response=await http.get(`/srv/emp/des/${desig}?${searchStr}`)
+            let response=await http.get(`/emp/desig/${desig}?${searchStr}`)
         let {data}=response;
         this.setState({emp:data})
         console.log(data)
@@ -91,14 +91,14 @@ class TaskEmp extends Component{
             {emp.map((pr)=>{
                 return(
                     <div className="row">
-                    <div className="col-1 border">{pr.empCode}</div>
+                    <div className="col-1 border">{pr.empcode}</div>
                     <div className="col-2 border">{pr.name}</div>
                     <div className="col-2 border">{pr.department}</div>
                     <div className="col-2 border">{pr.designation}</div>
                     <div className="col-1 border">{pr.salary}</div>
                     <div className="col-1 border">{pr.gender}</div>
-                    <div className="col-3 border"><button className="m-2 bg-warning"><Link to={`/newEmp/${pr.empCode}`}>Edit</Link></button>
-                    <button className="m-2 bg-danger"><Link to={`/dlt/${pr.empCode}`}>delete</Link></button></div>
+                    <div className="col-3 border"><button className="m-2 bg-warning"><Link to={`/newEmp/${pr.empcode}`}>Edit</Link></button>
+                    <button className="m-2 bg-danger"><Link to={`/dlt/${pr.empcode}`}>delete</Link></button></div>
                 </div>
                 )
             })}

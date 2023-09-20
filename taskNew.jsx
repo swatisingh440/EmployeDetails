@@ -3,21 +3,21 @@ import http from './tashServer';
 import { Link } from "react-router-dom";
 class TaskNew extends Component{
     state={
-        newEmp:{empCode:'',name:'',department:'',designation:'',salary:'',gender:''},
+        newEmp:{empcode:'',name:'',department:'',designation:'',salary:'',gender:''},
         edit:false
     }
     async fetchData(){
         const {empCode}=this.props.match.params;
         console.log(empCode)
         if(empCode){
-            let response1=await http.get(`/srv/emp/id/${empCode}`);
+            let response1=await http.get(`/emp/empCode/${empCode}`);
             let {data}=response1;
             console.log(data)
             this.setState({newEmp:data[0],edit:true})
             
         }
         else{
-           let  newEmp={empCode:'',name:'',department:'',designation:'',salary:'',gender:''} ;
+           let  newEmp={empcode:'',name:'',department:'',designation:'',salary:'',gender:''} ;
            this.setState({newEmp:newEmp,edit:false})
         }
     }
@@ -47,8 +47,8 @@ class TaskNew extends Component{
     handleSubmit=(e)=>{
         e.preventDefault();
         let {newEmp,edit}=this.state;
-        edit?this.putData(`/srv/emp/${newEmp.empCode}`,newEmp):
-        this.postData("/srv/emp",newEmp)
+        edit?this.putData(`/emp/${newEmp.empcode}`,newEmp):
+        this.postData("/emp",newEmp)
     }
     makeDropDown=(arr=[],value,name,label)=>{
         return(
@@ -65,7 +65,7 @@ class TaskNew extends Component{
     }
     render(){
         const {dept,desig}=this.props;
-        let {empCode,name,department,designation,salary,gender}=this.state.newEmp;
+        let {empcode,name,department,designation,salary,gender}=this.state.newEmp;
         console.log(this.state.newEmp)
         return(
             <div className="container">
@@ -73,7 +73,7 @@ class TaskNew extends Component{
                     <label>Employee Code</label>
                     <input type="text" className='form-control'
                     id="empCode" name="empCode" placeholder='Enter empCode'
-                    value={empCode} onChange={this.handleChange}/>
+                    value={empcode} onChange={this.handleChange}/>
                 </div>
                 <div className='form-group'>
                     <label>Name</label>

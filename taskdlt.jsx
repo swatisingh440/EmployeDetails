@@ -4,7 +4,7 @@ class Taskdlt extends Component{
     async componentDidMount(){
         const {empCode}=this.props.match.params;
         console.log(empCode)
-        let response=await http.deleteApi(`/srv/emp/${empCode}`);
+        let response=await http.deleteApi(`/emp/${empCode}`);
         console.log(response)
         this.props.history.push("/emp")
        
